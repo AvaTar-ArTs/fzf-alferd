@@ -1,6 +1,34 @@
 # fzf-alfred v4 Finalization Plan
 
-> **For Hermes:** Use subagent-driven-development skill to implement this plan task-by-task.
+> **Status: complete (2026-10-14).** Tasks 1–8 are done; two departures from the
+> plan as written are noted below. The code snippets below are the *original*
+> sketches, kept for the record — the shipped code differs where noted.
+
+## Completion record
+
+| Task | Status | Notes |
+|------|--------|-------|
+| 1 — cache depth | ✅ | Superseded: the cache is now keyed by `search_path`/`excludes`/`max_results`, and scan depth is `max_results * 10`. |
+| 2 — eza metadata | ✅ | Superseded: the awk column scan was replaced by a **fixed-position** parse (`-d --time-style=long-iso`) because filenames with spaces shifted the columns. |
+| 3 — test suite | ✅ | Grew from 8 checks to **33** (JSON contract, `search_path` handling, cache/history, plist graph reachability, packaged artifact). |
+| 4 — package `.alfredworkflow` | ✅ | Now reproducible via `scripts/build.sh` (Task 7 deviation) instead of an ad-hoc `zip`. |
+| 5 — README | ✅ | Updated for two keywords, `jq`, the `v4/` layout and the build script. |
+| 6 — Gallery metadata | ✅ | Updated for two keywords, `jq` and the real repo URL. |
+| 7 — clean up old versions | ⚠️ **changed** | Old versions archived under `versions/v2` and `versions/v3` (there was never a committed v1). The "copy v4 to repo root" step was **dropped**: `v4/` stays canonical and the root holds only docs, the built artifact and `scripts/build.sh`. |
+| 8 — final integration test | ✅ | `./v4/test.sh` (33/33) plus `./scripts/build.sh --check`; the packaged artifact is extracted and executed the way Alfred runs it. |
+
+### Why Task 7 changed
+
+Copying `v4/` into the repository root mixed the shippable workflow internals
+(`info.plist`, `search.sh`, `lib.sh`) with repo metadata (`README.md`,
+`CHANGELOG.md`, `docs/`, `versions/`), and duplicated `v4/`. Keeping `v4/`
+canonical is consistent with `versions/v2`, `versions/v3`, makes diffs across
+versions trivial, and lets `scripts/build.sh` be the single source of the
+installable archive.
+
+---
+
+> **For the record:** the original plan text follows.
 
 **Goal:** Finalize v4 as the ship version, package it, and prepare for Alfred Gallery submission.
 

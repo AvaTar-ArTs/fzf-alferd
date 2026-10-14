@@ -1,56 +1,94 @@
 # fzf-alfred
 
-Alfred workflow with fzf + eza for fuzzy file navigation.
+Alfred workflow for fuzzy file and folder navigation, combining **fd** (fast
+discovery), **fzf** (fuzzy matching) and **eza** (rich metadata), driven entirely
+by shell scripts — no Node.js, Python or PHP runtime needed.
 
 ## Features
 
-- Fuzzy file search with Alfred's native filtering (with memorization)
-- Rich file metadata with eza (icons, git status, permissions)
-- Fast file discovery with fd
-- Standard Alfred modifier key actions
-- Dynamic placeholder support
+- **`fzfnav`** — fuzzy search across files *and* directories
+- **`fzfdir`** — fuzzy search across directories only (jump straight to a project folder)
+- Rich metadata per result from eza: permissions, size, modified date and git status
+- File-type icons (📁 folders, 🐍 Python, 📝 Markdown, …)
+- Path-scoped file-list cache (5-minute TTL) so keystrokes stay instant after the first search
+- Search history (`~/Library/Application Support/Alfred/Workflow Data/...`)
+- Standard Alfred modifier actions on every result
+- Background update check against GitHub releases
+- Always emits valid JSON (built with `jq`, not hand-rolled escaping)
 
 ## Requirements
 
-- [Alfred 5](https://www.alfredapp.com/) with Powerpack
-- [fzf](https://github.com/junegunn/fzf)
-- [fd](https://github.com/sharkdp/fd)
-- [eza](https://github.com/eza-community/eza)
+- Alfred 5 with the Powerpack
+- `fd`, `fzf`, `eza` and `jq` on `PATH`:
 
-```bash
-brew install fzf fd eza
-```
+  ```sh
+  brew install fd fzf eza jq
+  ```
 
 ## Installation
 
-1. Download the `.alfredworkflow` file from Releases
-2. Double-click to install in Alfred
-3. Configure search path in workflow settings
+1. Download [`fzf-alfred.alfredworkflow`](fzf-alfred.alfredworkflow).
+2. Double-click it to install into Alfred.
 
 ## Usage
 
-- Keyword: `fzfnav` — fuzzy search files
-- `Enter` — open file
-- `Cmd+Enter` — reveal in Finder
-- `Alt+Enter` — open in Terminal
-- `Ctrl` — copy path to clipboard
-- `Cmd+L` — show full path in Large Type
+Type a keyword, then a query:
+
+| Keyword  | Searches                        |
+|----------|---------------------------------|
+| `fzfnav` | files and folders               |
+| `fzfdir` | folders only                    |
+
+Keys on a selected result:
+
+| Key       | Action                                                     |
+|-----------|------------------------------------------------------------|
+| `Enter`   | Open the file (or folder) with the default application     |
+| `⌘ Enter` | Reveal in Finder                                           |
+| `⌥ Enter` | Open a Terminal (or iTerm) window in the item's folder     |
+| `⌃ Enter` | Copy the full path to the clipboard                        |
+| `⌘ L`     | Large Type (Alfred built-in)                               |
+| `⌘ Y`     | Quick Look (Alfred built-in)                               |
 
 ## Configuration
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `search_path` | `~` | Directory to search |
-| `excludes` | `node_modules;.git;.cache;Library` | Exclude patterns (semicolon-separated) |
-| `max_results` | `100` | Maximum results to show |
+Set these in the workflow's configuration sheet (Alfred preferences → Workflows →
+fzf-alfred → `[𝔁]`):
 
-## v2 Changes
+| Variable     | Default                                | Description                                   |
+|--------------|----------------------------------------|-----------------------------------------------|
+| `search_path`| `~`                                    | Directory to search                           |
+| `excludes`   | `node_modules;.git;.cache;Library`     | Semicolon-separated exclude patterns          |
+| `max_results`| `100`                                  | Maximum number of results shown               |
+| `cache_ttl`  | `300`                                  | Seconds before the cached file list is rebuilt |
 
-- Switched to Alfred's native filtering (enables result memorization/ranking)
-- Standard Alfred modifier keys (matches Finder Crawl workflow)
-- Added Ctrl (copy path) and Cmd+L (Large Type) actions
-- Added `match` property to JSON output for better filtering
-- Word matching mode for flexible search
+## Repository layout
+
+```
+fzf-alfred/
+├── v4/                          current source (canonical)
+│   ├── info.plist               workflow definition
+│   ├── lib.sh                   shared config, cache, eza metadata, JSON emission
+│   ├── search.sh                fzfnav  — files + folders
+│   ├── dirs.sh                  fzfdir  — folders only
+│   ├── icon.png                 workflow icon
+│   └── test.sh                  test suite
+├── versions/                    earlier implementations (v2, v3), kept for comparison
+├── scripts/build.sh             packages v4/ into the .alfredworkflow
+├── docs/                        design notes, plans, gallery submission
+└── fzf-alfred.alfredworkflow    built, installable artifact
+```
+
+## Development
+
+```sh
+./v4/test.sh          # 33 checks: JSON contract, search_path handling, plist graph, packaged artifact
+./scripts/build.sh    # rebuild fzf-alfred.alfredworkflow from v4/
+```
+
+An `.alfredworkflow` file is a zip whose root contains `info.plist` and the
+scripts it references; `scripts/build.sh` produces it in that shape and verifies
+the result.
 
 ## License
 

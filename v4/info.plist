@@ -8,13 +8,55 @@
 	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
+		<key>FZFNAV-MAIN-001</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>COND-REVEAL-001</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>FZFDIR-MAIN-001</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>COND-REVEAL-001</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>COND-REVEAL-001</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>ACT-REVEAL-001</string>
-				<key>sourceuid</key>
-				<string>COND-REVEAL-001</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>2E8A2C71-6F1D-4C4E-9B3A-0F5D7A1C8E10</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>COND-TERMINAL-001</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 		<key>COND-TERMINAL-001</key>
@@ -22,8 +64,24 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>ACT-TERMINAL-001</string>
-				<key>sourceuid</key>
-				<string>COND-TERMINAL-001</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>5B9D4E36-2A88-4F71-A0C5-73E1B9D6F2A4</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>COND-COPY-001</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 		<key>COND-COPY-001</key>
@@ -31,24 +89,31 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>ACT-COPY-001</string>
-				<key>sourceuid</key>
-				<string>COND-COPY-001</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>8C41F7A9-3D62-4E15-B7F8-9A2C4E6D1B03</string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
-		</array>
-		<key>COND-LARGE-001</key>
-		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>ACT-LARGE-001</string>
-				<key>sourceuid</key>
-				<string>COND-LARGE-001</string>
+				<string>ACT-OPEN-001</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
 			</dict>
 		</array>
 	</dict>
 	<key>createdby</key>
 	<string>AvaTarArTs</string>
 	<key>description</key>
-	<string>fzf-alfred v4: Pure shell workflow with caching, auto-update, search history, and standard Alfred modifier keys.</string>
+	<string>fzf-alfred v4: pure-shell fuzzy navigation over files and folders (fd + fzf + eza), with a file-list cache, search history and standard Alfred modifier actions.</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -66,18 +131,28 @@
 				<integer>102</integer>
 				<key>keyword</key>
 				<string>fzfnav</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>Searching files...</string>
+				<string>Searching files…</string>
 				<key>script</key>
-				<string>./v4/search.sh "{query}"</string>
+				<string>"$alfred_workflow_directory/search.sh" "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
 				<key>subtext</key>
-				<string>Search files with fzf + eza</string>
+				<string>Search files with fd + fzf + eza</string>
 				<key>title</key>
 				<string>Fuzzy File Navigation</string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>11</integer>
 				<key>withspace</key>
 				<true/>
 			</dict>
@@ -85,6 +160,49 @@
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
 			<string>FZFNAV-MAIN-001</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>fzfdir</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Searching folders…</string>
+				<key>script</key>
+				<string>"$alfred_workflow_directory/dirs.sh" "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Search folders with fd + fzf + eza</string>
+				<key>title</key>
+				<string>Fuzzy Folder Navigation</string>
+				<key>type</key>
+				<integer>11</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>FZFDIR-MAIN-001</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
@@ -102,10 +220,16 @@
 						<integer>0</integer>
 						<key>matchstring</key>
 						<string>reveal</string>
+						<key>outputlabel</key>
+						<string>Reveal in Finder</string>
+						<key>uid</key>
+						<string>2E8A2C71-6F1D-4C4E-9B3A-0F5D7A1C8E10</string>
 					</dict>
 				</array>
-				<key>outputlabel</key>
-				<string>Reveal in Finder</string>
+				<key>elselabel</key>
+				<string>Continue</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -126,10 +250,16 @@
 						<integer>0</integer>
 						<key>matchstring</key>
 						<string>terminal</string>
+						<key>outputlabel</key>
+						<string>Open in Terminal</string>
+						<key>uid</key>
+						<string>5B9D4E36-2A88-4F71-A0C5-73E1B9D6F2A4</string>
 					</dict>
 				</array>
-				<key>outputlabel</key>
-				<string>Open in Terminal</string>
+				<key>elselabel</key>
+				<string>Continue</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -150,10 +280,16 @@
 						<integer>0</integer>
 						<key>matchstring</key>
 						<string>copy</string>
+						<key>outputlabel</key>
+						<string>Copy Path</string>
+						<key>uid</key>
+						<string>8C41F7A9-3D62-4E15-B7F8-9A2C4E6D1B03</string>
 					</dict>
 				</array>
-				<key>outputlabel</key>
-				<string>Copy Path</string>
+				<key>elselabel</key>
+				<string>Continue</string>
+				<key>hideelse</key>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.conditional</string>
@@ -163,38 +299,16 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:action}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>large</string>
-					</dict>
-				</array>
-				<key>outputlabel</key>
-				<string>Large Type</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>COND-LARGE-001</string>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>open -R "{query}"</string>
+				<string>open -R -- "$1"</string>
 				<key>scriptargtype</key>
-				<integer>0</integer>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>11</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -207,11 +321,13 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>cd "{query}" &amp;&amp; eza --icons=always --color=always --git --long --group-directories-first</string>
+				<string>target="$1"; [[ -d "$target" ]] || target="$(dirname "$target")"; if [[ -d "/Applications/iTerm.app" ]]; then open -a iTerm "$target"; else open -a Terminal "$target"; fi</string>
 				<key>scriptargtype</key>
-				<integer>0</integer>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>11</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -224,11 +340,13 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>echo -n "{query}" | pbcopy</string>
+				<string>printf '%s' "$1" | pbcopy</string>
 				<key>scriptargtype</key>
-				<integer>0</integer>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>11</integer>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.script</string>
@@ -241,47 +359,63 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>echo "{query}"</string>
+				<string>open -- "$1"</string>
 				<key>scriptargtype</key>
-				<integer>0</integer>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
 				<key>type</key>
-				<integer>0</integer>
+				<integer>11</integer>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.largetype</string>
+			<string>alfred.workflow.action.script</string>
 			<key>uid</key>
-			<string>ACT-LARGE-001</string>
+			<string>ACT-OPEN-001</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>fzf-alfred v4: Pure shell workflow with caching, auto-update, search history, and standard Alfred modifier keys.</string>
+	<string>fzf-alfred v4 — pure-shell fuzzy file navigation.
+
+Two keywords:
+• fzfnav &lt;query&gt; — fuzzy search files and folders
+• fzfdir &lt;query&gt; — fuzzy search folders only
+
+Keys on a result:
+• Enter      — open
+• ⌘ Enter    — reveal in Finder
+• ⌥ Enter    — open a Terminal/iTerm window in the item's folder
+• ⌃ Enter    — copy the full path
+• ⌘ L        — Large Type (Alfred built-in)
+• ⌘ Y        — Quick Look (Alfred built-in)
+
+Requires fd, fzf and eza (e.g. `brew install fd fzf eza`).</string>
 	<key>uidata</key>
 	<dict>
 		<key>ACT-COPY-001</key>
 		<dict>
 			<key>xpos</key>
-			<integer>600</integer>
+			<integer>620</integer>
 			<key>ypos</key>
 			<integer>450</integer>
 		</dict>
-		<key>ACT-LARGE-001</key>
+		<key>ACT-OPEN-001</key>
 		<dict>
 			<key>xpos</key>
-			<integer>600</integer>
+			<integer>620</integer>
 			<key>ypos</key>
 			<integer>600</integer>
 		</dict>
 		<key>ACT-REVEAL-001</key>
 		<dict>
 			<key>xpos</key>
-			<integer>600</integer>
+			<integer>620</integer>
 			<key>ypos</key>
 			<integer>150</integer>
 		</dict>
 		<key>ACT-TERMINAL-001</key>
 		<dict>
 			<key>xpos</key>
-			<integer>600</integer>
+			<integer>620</integer>
 			<key>ypos</key>
 			<integer>300</integer>
 		</dict>
@@ -291,13 +425,6 @@
 			<integer>400</integer>
 			<key>ypos</key>
 			<integer>450</integer>
-		</dict>
-		<key>COND-LARGE-001</key>
-		<dict>
-			<key>xpos</key>
-			<integer>400</integer>
-			<key>ypos</key>
-			<integer>600</integer>
 		</dict>
 		<key>COND-REVEAL-001</key>
 		<dict>
@@ -318,7 +445,14 @@
 			<key>xpos</key>
 			<integer>50</integer>
 			<key>ypos</key>
-			<integer>300</integer>
+			<integer>220</integer>
+		</dict>
+		<key>FZFDIR-MAIN-001</key>
+		<dict>
+			<key>xpos</key>
+			<integer>50</integer>
+			<key>ypos</key>
+			<integer>400</integer>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -378,7 +512,7 @@
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Maximum results to show</string>
+			<string>Maximum number of results to show</string>
 			<key>label</key>
 			<string>Max Results</string>
 			<key>type</key>
@@ -399,7 +533,7 @@
 				<true/>
 			</dict>
 			<key>description</key>
-			<string>Cache TTL in seconds</string>
+			<string>Seconds before the cached file list is rebuilt</string>
 			<key>label</key>
 			<string>Cache TTL (seconds)</string>
 			<key>type</key>
@@ -420,6 +554,6 @@
 		<string>~</string>
 	</dict>
 	<key>version</key>
-	<string>4.0.0</string>
+	<string>4.1.0</string>
 </dict>
 </plist>
