@@ -109,3 +109,28 @@
 
 - 33/33 tests pass, including running the packaged `.alfredworkflow`.
 - Shipping layout: `v4/` (source) → `scripts/build.sh` → `fzf-alfred.alfredworkflow`.
+
+## 2026-10-14 — Session 5: Verification, publishing and repository hygiene
+
+### Steps
+
+| # | Action | Tool Used | Result |
+|---|--------|-----------|--------|
+| 1 | Ran the full suite after the history/action-variable changes | `shell` | 36 passed, 0 failed |
+| 2 | Verified the Conditional utility forwards the **incoming arg** (not its input string) downstream, by inspecting Alfred's own Gallery workflow (`inputstring: {var:link_format}`, downstream script reads `argv[0]`) | `shell` (`plutil`, Python) | Confirmed the action scripts receive the file path as `$1` |
+| 3 | Fixed the update check to strip the leading `v` from release tags before comparing | `edit` | No more spurious "update available" when installed version equals the tag |
+| 4 | Wrote a proper `.gitignore` (build output, macOS cruft, editor files, scratch `.tmp/`) | `write` | See `.gitignore` |
+| 5 | Untracked the generated `.alfredworkflow` (`git rm --cached`) and moved distribution to GitHub Releases | `shell` | The archive embeds file mtimes, so it churned on every rebuild |
+| 6 | Made `v4/test.sh` build the artifact before extracting it (it no longer exists in a fresh clone) | `edit` | Suite is self-sufficient |
+| 7 | Pointed the README download link at the latest release asset | `edit` | `releases/latest/download/...` |
+
+### Tools Used
+
+- `shell` — `plutil`/Python to inspect reference workflows, `git rm --cached`, `git check-ignore`, `gh`
+- `edit` / `write` — `.gitignore`, `README.md`, `v4/lib.sh`, `v4/test.sh`
+- `verification-before-completion` skill — evidence-before-claims discipline
+
+### Outcome
+
+- 36/36 tests pass.
+- Build output is gitignored; the installable archive is published as a release asset.

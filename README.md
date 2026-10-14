@@ -27,8 +27,11 @@ by shell scripts — no Node.js, Python or PHP runtime needed.
 
 ## Installation
 
-1. Download [`fzf-alfred.alfredworkflow`](fzf-alfred.alfredworkflow).
+1. Download [`fzf-alfred.alfredworkflow`](https://github.com/AvaTar-ArTs/fzf-alferd/releases/latest/download/fzf-alfred.alfredworkflow)
+   from the latest release.
 2. Double-click it to install into Alfred.
+
+Or build it yourself from source: `./scripts/build.sh`.
 
 ## Usage
 
@@ -76,19 +79,20 @@ fzf-alfred/
 ├── versions/                    earlier implementations (v2, v3), kept for comparison
 ├── scripts/build.sh             packages v4/ into the .alfredworkflow
 ├── docs/                        design notes, plans, gallery submission
-└── fzf-alfred.alfredworkflow    built, installable artifact
+└── fzf-alfred.alfredworkflow    built artifact (gitignored; shipped via Releases)
 ```
 
 ## Development
 
 ```sh
-./v4/test.sh          # 33 checks: JSON contract, search_path handling, plist graph, packaged artifact
+./v4/test.sh          # 36 checks: JSON contract, history, plist graph, packaged artifact
 ./scripts/build.sh    # rebuild fzf-alfred.alfredworkflow from v4/
 ```
 
 An `.alfredworkflow` file is a zip whose root contains `info.plist` and the
 scripts it references; `scripts/build.sh` produces it in that shape and verifies
-the result.
+the result. The archive is not committed — it is attached to each GitHub release
+— because it embeds file timestamps and would otherwise churn on every rebuild.
 
 ## License
 

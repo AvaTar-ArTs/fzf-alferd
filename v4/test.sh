@@ -141,6 +141,8 @@ PY
 
 echo "packaging"
 assert "build.sh --check succeeds"          "$(./scripts/build.sh --check >/dev/null 2>&1 && echo ok)"
+# The artifact is gitignored, so build it before extracting a fresh copy.
+./scripts/build.sh >/dev/null 2>&1
 extract_dir=$(mktemp -d)
 unzip -q fzf-alfred.alfredworkflow -d "$extract_dir"
 assert "artifact has info.plist at root"    "$(test -f "$extract_dir/info.plist" && echo ok)"
