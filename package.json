@@ -1,0 +1,24 @@
+{
+  "name": "alfred-fzf-alfred",
+  "version": "3.0.0",
+  "description": "Alfred workflow with fzf + eza for fuzzy file navigation",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "alfy-init",
+    "preuninstall": "alfy-cleanup"
+  },
+  "dependencies": {
+    "alfy": "^2.0.0"
+  },
+  "keywords": [
+    "alfred",
+    "workflow",
+    "fzf",
+    "eza",
+    "fd",
+    "file-navigation"
+  ],
+  "author": "AvaTarArTs",
+  "license": "MIT"
+}
