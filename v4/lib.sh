@@ -170,7 +170,9 @@ check_for_updates() {
     (
         latest=$(curl -fsSL https://api.github.com/repos/AvaTar-ArTs/fzf-alferd/releases/latest 2>/dev/null |
             sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p')
+        latest="${latest#v}"          # tags are "v4.1.0"; versions are "4.1.0"
         current="${alfred_workflow_version:-0.0.0}"
+        current="${current#v}"
         if [[ -n "$latest" && "$latest" != "$current" ]]; then
             osascript -e "display notification \"Update available: $latest (installed: $current)\" with title \"fzf-alfred\"" 2>/dev/null
         fi
