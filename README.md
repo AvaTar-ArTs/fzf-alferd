@@ -19,11 +19,30 @@ by shell scripts — no Node.js, Python or PHP runtime needed.
 ## Requirements
 
 - Alfred 5 with the Powerpack
-- `fd`, `fzf`, `eza` and `jq` on `PATH`:
+- `fd`, `fzf`, `eza` and `jq` on `PATH`
 
-  ```sh
-  brew install fd fzf eza jq
-  ```
+**Homebrew is not required.** The workflow only needs the four binaries to be
+reachable; it searches the common install locations itself
+(`/opt/homebrew/bin`, `/usr/local/bin`, `/opt/local/bin`, and Alfred's `PATH`).
+Install them however you prefer:
+
+| Method | Command | Covers |
+|--------|---------|--------|
+| Homebrew | `brew install fd fzf eza jq` | all four |
+| MacPorts | `sudo port install fd fzf eza jq` | all four |
+| Rust (cargo) | `cargo install fd-find eza` | `fd`, `eza` |
+| Prebuilt binaries | download the release tarballs below into a `PATH` dir | `fd`, `fzf`, `jq` (see note) |
+| mise / nix / flox | `mise use -g fd fzf eza jq` | all four |
+
+Prebuilt macOS binaries (no package manager at all) are published by
+[fd](https://github.com/sharkdp/fd/releases) (`fd-*-apple-darwin.tar.gz`),
+[fzf](https://github.com/junegunn/fzf/releases) (`fzf-*-darwin_arm64.tar.gz`)
+and [jq](https://github.com/jqlang/jq/releases) (`jq-macos-arm64`).
+**eza does not ship a macOS binary** — on macOS use Homebrew, MacPorts or
+`cargo install eza`.
+
+If a tool is missing, the workflow shows a single result naming what is missing
+and how to install it, instead of failing silently.
 
 ## Installation
 

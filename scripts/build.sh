@@ -20,6 +20,7 @@ runtime=(info.plist search.sh dirs.sh lib.sh)
 
 for f in "${files[@]}"; do
     [[ -e "$src/$f" ]] || { echo "build: missing $src/$f" >&2; exit 1 }
+    [[ -L "$src/$f" ]] && { echo "build: $src/$f is a symlink — refusing to package" >&2; exit 1 }
 done
 
 if [[ "${1:-}" == "--check" ]]; then

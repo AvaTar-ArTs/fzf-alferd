@@ -541,6 +541,90 @@ Requires fd, fzf and eza (e.g. `brew install fd fzf eza`).</string>
 			<key>variable</key>
 			<string>cache_ttl</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>/opt/homebrew/bin/fd</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Absolute path to the fd binary (overrides PATH lookup)</string>
+			<key>label</key>
+			<string>fd Path</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>fd_path</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>/opt/homebrew/bin/fzf</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Absolute path to the fzf binary (overrides PATH lookup)</string>
+			<key>label</key>
+			<string>fzf Path</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>fzf_path</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>/opt/local/bin/eza</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Absolute path to the eza binary (overrides PATH lookup)</string>
+			<key>label</key>
+			<string>eza Path</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>eza_path</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>/usr/local/bin/jq</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Absolute path to the jq binary (overrides PATH lookup)</string>
+			<key>label</key>
+			<string>jq Path</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>jq_path</string>
+		</dict>
 	</array>
 	<key>variables</key>
 	<dict>
